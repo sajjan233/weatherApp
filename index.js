@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser')
 const db = 'mongodb://localhost/weatherDB';
-const router = require("./router/weather")
 const port = 5050;
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 mongoose.connect(db)
     .then(() => {
         console.log('database connection ');
@@ -15,11 +15,13 @@ mongoose.connect(db)
     })
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
 
 
-app.use('/', router)
+const allRoutes = require("./router/weather")
+app.use('/api', allRoutes)
+
+
+
 app.listen(port, () => {
     console.log('server run on port ', port);
 })

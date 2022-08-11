@@ -2,19 +2,22 @@ const axios = require("axios");
 
 
 
-const httpCall = async (reqUrl,reqMathod , next) => {
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${reqUrl}&appid==42b3d2c6ef001747a33ae80bc8b3bd95`;
+const httpCall = async (reqUrl) => {
+// console.log(reqUrl,reqMathod);
+    const url = `https://api.open-meteo.com/v1/forecast?q=${reqUrl}&latitude=29.15&longitude=75.75&hourly=temperature_2m,dewpoint_2m,rain,showers,weathercode,cloudcover,windspeed_10m,soil_temperature_0cm`;
     const option = {
-        "method": reqMathod,
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
     };
 
     const response = await axios(url,option)
     if(response){
-        next()
-        return response 
+        return response ;
     }
-    return console.error("api not rersponse");
+    return "api not rersponse";
 }
 
 module.exports = {httpCall}
