@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser')
 const db = 'mongodb://localhost/weatherDB';
-const router = require('../router/weather')
+const router = require("./router/weather")
 const port = 5050;
 
 mongoose.connect(db)
