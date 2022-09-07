@@ -15,7 +15,7 @@ const insertAndUpdate = async (data, reqCityName) => {
 }
 const weatherData = async (req, res) => {
     try {
-        let { cityname } = req.body;
+        let { cityname } = req.params;
         if (cityname) {
             const weatherReport = await Weather.findOne({ name: cityname });
             if (!weatherReport) {
